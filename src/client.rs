@@ -12,8 +12,8 @@ pub fn run() {
         .add_plugins(StartupPlugin)
         .add_plugins(FixedUpdatePlugin)
         .add_plugins(UpdatePlugin)
-        .insert_resource(Score(0, 0))
-        .insert_resource(Paused(true))
+        .insert_resource(Score::default())
+        .insert_resource(Paused::new(true))
         .add_event::<Scored>()
         .run();
 }

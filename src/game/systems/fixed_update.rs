@@ -35,9 +35,9 @@ fn handle_input(
     mut paused: ResMut<Paused>,
     mut query: Query<(&mut Transform, &Paddle)>,
 ) {
-    if paused.0 {
+    if **paused {
         if keyboard_input.just_pressed(KeyCode::Space) {
-            paused.0 = false;
+            **paused = false;
         }
         return;
     }
@@ -45,7 +45,7 @@ fn handle_input(
     for (mut transform, paddle) in &mut query {
         let mut direction = Vec2::ZERO;
 
-        match paddle.0 {
+        match **paddle {
             Player::Left => {
                 if keyboard_input.pressed(KeyCode::KeyW) {
                     direction.y += 1.0;
@@ -79,7 +79,7 @@ fn handle_velocity(
     time: Res<Time>,
     paused: Res<Paused>,
 ) {
-    if !paused.0 {
+    if !**paused {
         for (mut transform, velocity) in &mut query {
             transform.translation.x += velocity.x * time.delta_secs();
             transform.translation.y += velocity.y * time.delta_secs();

@@ -6,7 +6,7 @@ use bevy::{
 
 use super::common::Player;
 
-#[derive(Component)]
+#[derive(Component, Deref)]
 pub struct Paddle(pub Player);
 
 #[derive(Component)]
